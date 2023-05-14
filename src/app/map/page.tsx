@@ -1,12 +1,19 @@
 "use client";
 import Card from "@mui/material/Card";
-import React, { useState } from "react";
+import { LoadScript } from "@react-google-maps/api";
+import React, { lazy, Suspense } from "react";
+
+const Map = lazy(() => import("../../components/map"));
 
 const Page = () => {
 
     return (
         <div>
-            <Card>TODO: map & list of trash</Card>
+            <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY || ""}>
+                <Suspense fallback={<div>Loading...</div>}>    
+                    <Map />
+                </Suspense>
+            </LoadScript>
         </div>
     );
     
