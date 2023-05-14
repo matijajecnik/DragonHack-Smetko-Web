@@ -20,9 +20,11 @@ export default function Home() {
             solid waste generated, there is a pressing need 
             for effective waste management systems, and 
             this is where Smetko comes in.</div>
-            <Button variant="contained" style={{ backgroundColor: '#378805', borderRadius: '10px', marginTop: "20px" }}
-                color="primary"><Link style={{  }} href="/map">Go to map</Link></Button>
-            <Image alt="hey" src="/../../public/phones.png" width="1000" height="500" style={{ marginTop: "50px" }} />
+            <Button variant="contained" style={{ backgroundColor: '#378805', borderRadius: '10px', marginTop: "20px", fontSize: 18 }}
+                color="primary"><Link style={{ color: "white", textDecoration: "none" }} href="/map">Go to map</Link></Button>
+        <div style={{ marginTop: "300px "}}>
+            <p style={{ textAlign: "center" }}>Matej Aleksov, Luka Krajnik, Tim Rekelj, Matija Ječnik</p>
+        </div>
         </div>
     )
 }
