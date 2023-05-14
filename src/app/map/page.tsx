@@ -41,32 +41,33 @@ const Page = () => {
                     <AppBar position="absolute" 
                         sx={{ marginLeft: '60px', top: 'auto', bottom: 20, left: 0, 
                             right: 0, backgroundColor: 'white', height: '90vh', 
-                            width: '40vh', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                            width: '40vh', display: 'flex', alignItems: 'center' }}>
                             <h3 style={{color: "black"}}>Nujno potreben odvoz smeti</h3>
                         {points.map((p: any) => ( p.full_count > 5 &&
                             <Card onClick={() => handleSelect(p)} 
                                 key={p.id} 
-                                style={{ width: '38vh', height: '10vh', 
-                                backgroundColor: selected.includes(p) ? 'lightgray': 'white', borderColor: 'darkgreen',
-                                display: 'flex', flexDirection: 'column', justifyContent: 'space-around', 
-                                alignItems: 'center', borderRadius: '10px', borderStyle: "solid",  borderWidth: "1px" }}>
-                                <p>{p.name}</p>
-                                <p><text style={{color: "gray"}}>Število poročanj:&nbsp;</text><text style={{ fontWeight: "bold" }}>{p.full_count}</text></p>
+                                style={{ width: '36vh', height: '10vh', marginBottom: '16px',
+                                backgroundColor: selected.includes(p) ? 'lightgray': 'white', borderColor: '#378805',
+                                display: 'flex', flexDirection: 'column', 
+                                alignItems: 'center', borderRadius: '10px', borderStyle: "solid",  borderWidth: "1px", boxShadow: "none" }}>
+                                <text style={{ fontWeight: "bold", marginBottom: "16px", marginTop: "8px" }}>{p.name}</text>
+                                <><text style={{color: "gray"}}>Število poročanj:&nbsp;</text><text style={{ fontWeight: "bold" }}>{p.full_count}</text></>
                             </Card>
                         ))}
-                            <h3 style={{color: "gray"}}>Priporočen odvoz smeti</h3>
+                            <h3 style={{color: "gray", fontWeight: "bold"}}>Priporočen odvoz smeti</h3>
                         {points.map((p: any) => ( p.full_count <= 5 &&
                             <Card onClick={() => handleSelect(p)} 
                                 key={p.id} 
-                                style={{ width: '38vh', height: '10vh', 
-                                    backgroundColor: selected.includes(p) ? 'lightgray': 'white',
+                                style={{ width: '36vh', height: '10vh', marginBottom: '16px',
+                                    backgroundColor: selected.includes(p) ? 'lightgray': 'white', boxShadow: "none",
                                     display: 'flex', flexDirection: 'column', alignItems: 'center', 
                                     borderRadius: '10px', borderStyle: "solid",  borderWidth: "1px" }}>
-                                <p>{p.name}</p>
-                                <p><text style={{color: "gray"}}>Število poročanj:&nbsp;</text><text style={{ fontWeight: "bold" }}>{p.full_count}</text></p>
+                                <text style={{ fontWeight: "bold", marginBottom: "16px", marginTop: "8px" }}>{p.name}</text>
+                                <><text style={{color: "gray"}}>Število poročanj:&nbsp;</text><text style={{ fontWeight: "bold" }}>{p.full_count}</text></>
                             </Card>
                         ))}
-                        <Button variant="contained" color="primary" onClick={() => {
+                        <Button variant="contained" style={{ backgroundColor: '#378805', borderRadius: '10px' }}
+                            color="primary" onClick={() => {
                             setChosen(selected); 
                             setSelected([]);
                             selected.forEach((p: any) => {updatePoint(p); p.full_count = 0;});
