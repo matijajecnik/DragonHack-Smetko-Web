@@ -1,19 +1,32 @@
 "use client";
-import Card from "@mui/material/Card";
+import supabase from "@/lib/supabaseClient";
+import { Button } from "@mui/material";
 import { LoadScript } from "@react-google-maps/api";
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 
 const Map = lazy(() => import("../../components/map"));
 
 const Page = () => {
+    const [points, setPoints] = useState<any>(null);
+    const [refresh, setRefresh] = useState<boolean>(false);
+
+    async function getPoints() {
+        await supabase.from("Smetnjaki").select("*")
+        .then(r => setPoints(r.data))
+    };
+  
+    useEffect(() => {
+        getPoints();
+    }, [refresh]);
 
     return (
         <div>
-            <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY || ""}>
+            <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY || ""}>
                 <Suspense fallback={<div>Loading...</div>}>    
-                    <Map />
+                    <Map points={points} />
                 </Suspense>
             </LoadScript>
+            <Button onClick={() => setRefresh(!refresh)}>Refresh</Button>
         </div>
     );
     
