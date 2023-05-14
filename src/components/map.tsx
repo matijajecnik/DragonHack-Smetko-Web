@@ -10,7 +10,12 @@ const containerStyle = {
 const center = { lat: 46.024029, lng: 14.476362 };
 
 const Map = ({points}: {points: Array<any>}) => {
+  const [selected, setSelected] = useState<any>(points);
   const [map, setMap] = useState<any>(null);
+
+  useEffect(() => {
+    setSelected(points);
+  }, [points]);
 
   useEffect(() => {
     const directionsService = new window.google.maps.DirectionsService();
@@ -18,7 +23,7 @@ const Map = ({points}: {points: Array<any>}) => {
       {
         origin: center,
         destination: center,
-        waypoints: points.map((p: any) => ({location: new window.google.maps.LatLng(p.latitude, p.longitude), stopover: true})),
+        waypoints: selected.map((p: any) => ({location: new window.google.maps.LatLng(p.latitude, p.longitude), stopover: true})),
         optimizeWaypoints: true,
         travelMode: window.google.maps.TravelMode.DRIVING
       },
@@ -30,13 +35,13 @@ const Map = ({points}: {points: Array<any>}) => {
         }
       }
     );
-  }, []);
+  }, [selected]);
 
   return (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={16}
+      zoom={5}
     >
       {map && <DirectionsRenderer directions={map} />}
     </GoogleMap>
